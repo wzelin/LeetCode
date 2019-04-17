@@ -1,6 +1,9 @@
 package com.dingli.leetcode.test13;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 罗马数字包含以下七种字符：I,V,X,L,C,D,M.
  * 字符   数值
@@ -46,7 +49,32 @@ package com.dingli.leetcode.test13;
 public class Test {
     public static void main(String[] args) {
 
-
+        int i = romanToInt("MCMXCIV");
+        System.out.println(i);
 
     }
+
+    public static int romanToInt(String s) {
+        Map<Character,Integer> map = new HashMap<>();
+
+        map.put('I',1);
+        map.put('V',5);
+        map.put('X',10);
+        map.put('L',50);
+        map.put('C',100);
+        map.put('D',500);
+        map.put('M',1000);
+
+        int result = 0;
+        for (int i = 0; i < s.length(); i ++) {
+            if (i > 0 && map.get(s.charAt(i)) > map.get(s.charAt(i - 1))){
+                result += map.get(s.charAt(i)) - 2 * map.get(s.charAt(i - 1));
+            } else {
+                result += map.get(s.charAt(i));
+            }
+        }
+
+        return result;
+    }
+
 }
